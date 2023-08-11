@@ -10,8 +10,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   let effectiveId: number;
-  if (id <= 15) {
-    effectiveId = id;
+  const collectionRelativeId = ((id - 1) % 50000) + 1;
+
+  if (collectionRelativeId <= 15) {
+    effectiveId = collectionRelativeId;
   } else {
     const seed = crypto
       .createHash("sha256")
